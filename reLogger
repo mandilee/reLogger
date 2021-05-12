@@ -13,9 +13,9 @@
 /////////////////////////////////////////////////
 
 
-/// CHANGE THIS URL TO SET A CUSTOM AVATAR FOR YOUR LAB RAY LOGS! ///
+/// CHANGE THIS URL TO SET A CUSTOM AVATAR FOR YOUR RE LOGS! ///
 
-var profilePic = "https://cdn.discordapp.com/avatars/186228534115565570/1f40e4ca3960cf2c58679e065c0a295c.png"
+var profilePic = "https://images.neopets.com/games/betterthanyou/contestant319.gif"
 
 /////////////////////////////////////////////////
 
