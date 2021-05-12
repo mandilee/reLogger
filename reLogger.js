@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         NPC Random Event Logger
-// @version      0.2
+// @version      0.3
 // @description  Sends random events in real time to the NPC Logs Discord Server
 // @author       plushies
 // @include      https://neopetsclassic.com/*
@@ -15,7 +15,7 @@
 
 /// CHANGE THIS URL TO SET A CUSTOM AVATAR FOR YOUR RE LOGS! ///
 
-var profilePic = "https://images.neopets.com/games/betterthanyou/contestant319.gif"
+var profilePic = "https://cdn.discordapp.com/avatars/186228534115565570/1f40e4ca3960cf2c58679e065c0a295c.png"
 
 /////////////////////////////////////////////////
 
@@ -24,12 +24,13 @@ localStorage.getItem("reLogs==") != null ? storage = JSON.parse(localStorage.get
 
 function sendMessage()
     {
+        console.log("starting function sendMessage()");
         var destination = "https://discord.com/api/webhooks/842068036093870140/j7ArqsOyrR9gxihHMXqB7dsi9vEDbPoKOo1LindlJvs-NSfmm4b9Hzp0lYT_reJXzjab"
         var request = new XMLHttpRequest();
 
         request.open("POST", destination);
         request.setRequestHeader('Content-type', 'application/json');
-
+        console.log("request open!");
         var params =
           {
               "content": null,
@@ -49,7 +50,7 @@ function sendMessage()
 
                       "thumbnail":
                       {
-                          "url": "https://neopetsclassic.com" + rePic
+                          "url": rePic
                       },
                       "footer": {
                           "text": ""
@@ -62,6 +63,7 @@ function sendMessage()
 
 
       request.send(JSON.stringify(params));
+        console.log("request sent!");
     }
 
 
@@ -79,7 +81,7 @@ var user = "";
 
 if(pageHTML.indexOf("Something has happened!") !== -1)
 {
-    console.log("Something has happened! -AREL");
+    console.log("RE detected!!");
       user = document.getElementsByClassName("tt");
       user = user[0];
       user = user.getElementsByTagName("a")[0].getAttribute('href');
@@ -98,14 +100,28 @@ if(pageHTML.indexOf("Something has happened!") !== -1)
     }
 
 
-    re = document.querySelector(".txt").innerHTML;
-    re = re.replace ("<b>", "**")
-    re = re.replace ("</b>", "**")
-    re = re.replace ("<i>", "*")
-    re = re.replace ("</i>", "*")
-
+    re = document.querySelector(".txt").innerText//.innerHTML;
+    //re = re.replace ("<b>", "**")
+    //re = re.replace ("</b>", "**")
+    //re = re.replace ("<i>", "*")
+    //re = re.replace ("</i>", "*")
+    console.log(re + " (re text)");
     rePic = document.getElementsByClassName("rimg")[0]//.getAttribute('src');
     rePic = rePic.getElementsByTagName("img")[0].getAttribute('src');
+    console.log(rePic + " (re image");
+
+    if (rePic.indexOf("neopetsclassic.com") !== -1)
+    {
+        console.log("re pic unchanged, keeping as " + rePic);
+    }
+    else
+    {
+        console.log("re pic missing the neopetsclassic.com part. before: " + rePic);
+
+        rePic = "https://neopetsclassic.com" + rePic
+
+        console.log("rePic url changed to " + rePic);
+    }
 
 sendMessage();
 
