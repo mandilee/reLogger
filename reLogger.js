@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         NPC Random Event Logger
-// @version      0.3
+// @version      0.4
 // @description  Sends random events in real time to the NPC Logs Discord Server
 // @author       plushies
 // @include      https://neopetsclassic.com/*
@@ -15,7 +15,7 @@
 
 /// CHANGE THIS URL TO SET A CUSTOM AVATAR FOR YOUR RE LOGS! ///
 
-var profilePic = "https://cdn.discordapp.com/avatars/186228534115565570/1f40e4ca3960cf2c58679e065c0a295c.png"
+var profilePic = "https://neopetsclassic.com/images/items/petpet_kiko.gif"
 
 /////////////////////////////////////////////////
 
@@ -100,13 +100,9 @@ if(pageHTML.indexOf("Something has happened!") !== -1)
     }
 
 
-    re = document.querySelector(".txt").innerText//.innerHTML;
-    //re = re.replace ("<b>", "**")
-    //re = re.replace ("</b>", "**")
-    //re = re.replace ("<i>", "*")
-    //re = re.replace ("</i>", "*")
+    re = document.querySelector(".txt").innerText
     console.log(re + " (re text)");
-    rePic = document.getElementsByClassName("rimg")[0]//.getAttribute('src');
+    rePic = document.getElementsByClassName("rimg")[0]
     rePic = rePic.getElementsByTagName("img")[0].getAttribute('src');
     console.log(rePic + " (re image");
 
